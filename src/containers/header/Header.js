@@ -7,6 +7,7 @@ import {
   Collapse,
   Icon,
   IconButton,
+  Divider,
 } from '@material-ui/core';
 import InnerContainer from 'components/containers/InnerContainer';
 import logo from 'assets/logo.png';
@@ -29,7 +30,9 @@ const styles = ({ breakpoints }) => ({
   },
   logo: {
     marginTop: '28px',
-    height: '53px',
+    height: '10vw',
+    maxHeight: '53px',
+    minHeight: '32px',
   },
   navbar: {
     maxWidth: '65%',
@@ -94,11 +97,14 @@ const Header = ({ classes }) => {
             </IconButton>
           </Fade>
           <InnerContainer>
-            <div className={classes.headerContent}>
-              <img className={classes.logo} src={logo} alt="The Siren Logo" />
-            </div>
+            <Fade in={true} timeout={200}>
+              <div className={classes.headerContent}>
+                <img className={classes.logo} src={logo} alt="The Siren Logo" />
+              </div>
+            </Fade>
             <Collapse in={transitionIn}>
               <Navbar className={classes.navbar} menus={menus} />
+              <Divider />
             </Collapse>
           </InnerContainer>
           <Fade in={transitionIn}>

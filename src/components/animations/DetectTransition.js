@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 // Detect animation transition and handle hide/show content
 const DetectTransition = ({ children, mediaQuery, exitDuration }) => {
   const isVisible = useMediaQuery(mediaQuery);
-  const [hideContent, setHideContent] = useState(false);
-  const [transitionIn, setTransitionIn] = useState(isVisible);
+  const [hideContent, setHideContent] = useState(!isVisible);
+  const [transitionIn, setTransitionIn] = useState(false);
 
   useEffect(() => {
     let timeOut;

@@ -7,7 +7,8 @@ const styles = (theme) => {
   return {
   root: {
     width: '100%',
-    maxWidth: '1400px'
+    maxWidth: '1400px',
+    margin: '0 auto'
   }
 };
 }
