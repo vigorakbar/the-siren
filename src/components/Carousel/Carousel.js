@@ -1,20 +1,36 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { withStyles, Slide } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { withStyles, Fade } from '@material-ui/core';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-// import { usePrevious } from 'methods';
 import Dot from './Dot';
+import { usePrevious } from 'helpers/hooks';
 
 const styles = () => ({
   root: {
     overflow: 'hidden',
+    position: 'relative',
   },
   image: {
-    position: 'relative',
+    position: 'absolute',
     backgroundSize: 'cover',
   },
+  overlay: {
+    zIndex: 15,
+  },
+  imageFront: {
+    zIndex: 10,
+  },
+  imageMiddle: {
+    zIndex: 5,
+  },
+  imageBack: {
+    zIndex: 0,
+  },
+  dot: {
+    marginTop: '10px',
+  },
   dotsContainer: {
-    display: 'absolute',
+    position: 'absolute',
     right: '4.79%',
     bottom: '13.56%',
   },
@@ -24,52 +40,38 @@ const styles = () => ({
   },
 });
 
-let timer;
-const RESET_TIMER = 'RESET_TIMER';
-
-export const usePrevious = value => {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-};
-
-const Carousel = ({ className, classes, images, overlay, interval = 5000 }) => {
+const Carousel = ({
+  className,
+  classes,
+  images,
+  overlay,
+  interval = 5300,
+  exitTime = 500,
+  enterTime = 500,
+}) => {
+  // set interval for slide event
   const [activeIndex, setActiveIndex] = useState(0);
-  const [slideDirection, setSlideDirection] = useState('up');
   const prevActiveIndex = usePrevious(activeIndex);
-  // carousel slide timer
-  const timerEffect = useCallback(
-    type => {
-      if (type === RESET_TIMER) clearInterval(timer);
-      timer = setInterval(() => {
-        setActiveIndex(index => (index === images.length - 1 ? 0 : index + 1));
-      }, interval);
-
-      return () => {
-        clearInterval(timer);
-      };
-    },
-    [images.length, interval]
-  );
-
-  // start timer
-  useEffect(() => timerEffect(), [timerEffect]);
-  // update timer
   useEffect(() => {
-    timerEffect(RESET_TIMER);
-    setSlideDirection(prevActiveIndex < activeIndex ? 'down' : 'up');
-  }, [activeIndex, prevActiveIndex, timerEffect]);
+    const next = (activeIndex + 1) % images.length;
+    const timeout = setTimeout(() => {
+      setActiveIndex(next);
+    }, interval);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [activeIndex, prevActiveIndex, images.length, interval]);
 
   const renderDots = () => (
     <div>
       {images.map((image, i) => (
         <Dot
+          key={i}
           isActive={activeIndex === i}
           onClick={() => {
             setActiveIndex(i);
           }}
+          className={classes.dot}
         />
       ))}
     </div>
@@ -77,17 +79,45 @@ const Carousel = ({ className, classes, images, overlay, interval = 5000 }) => {
 
   return (
     <div className={cx(className, classes.root, classes.fullSize)}>
-      {images.map((image, i) => (
-        <Slide in={activeIndex === i} direction={slideDirection}>
-          <div
-            className={cx(classes.image, classes.fullSize)}
-            style={{ backgroundImage: `url(${image})` }}
-          >
-            {overlay}
-            <div className={classes.dotsContainer}>{renderDots}</div>
-          </div>
-        </Slide>
-      ))}
+      {images.map((image, i) => {
+        const isActive = activeIndex === i;
+        const isPrevActive = prevActiveIndex === i;
+        return (
+          <React.Fragment key={i}>
+            <Fade
+              key={i}
+              in={isActive}
+              timeout={{ enter: enterTime, exit: exitTime }}
+              appear={false}
+            >
+              <div
+                className={cx(
+                  classes.image,
+                  classes.fullSize,
+                  isActive && classes.imageFront,
+                  !isActive && classes.imageBack
+                )}
+                style={{ backgroundImage: `url(${image})` }}
+                role="img"
+                aria-label={`carousel image ${i + 1}`}
+              >
+                {overlay}
+              </div>
+            </Fade>
+            <div
+              className={cx(
+                classes.image,
+                classes.fullSize,
+                isPrevActive ? classes.imageMiddle : classes.imageBack
+              )}
+              style={{ backgroundImage: `url(${image})` }}
+            />
+            <div className={cx(classes.dotsContainer, classes.overlay)}>
+              {renderDots()}
+            </div>
+          </React.Fragment>
+        );
+      })}
     </div>
   );
 };
@@ -96,6 +126,8 @@ Carousel.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
   overlay: PropTypes.node,
   interval: PropTypes.number,
+  exitTime: PropTypes.number,
+  enterTime: PropTypes.number,
 };
 
 export default withStyles(styles)(Carousel);

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import cx from 'classnames';
 import {
   withStyles,
-  useTheme,
   Fade,
   Collapse,
   Icon,
@@ -11,13 +10,15 @@ import {
 } from '@material-ui/core';
 import InnerContainer from 'components/containers/InnerContainer';
 import logo from 'assets/logo.png';
-import DetectTransition from 'components/animations/DetectTransition';
 import Navbar from 'components/NavBar/Navbar';
 import MenuDrawer from './MenuDrawer';
+import { useDetectTransition } from 'helpers/hooks';
 
 const styles = ({ breakpoints }) => ({
   header: {
     display: 'flex',
+    maxWidth: '1822px',
+    margin: '0 auto',
     justifyContent: 'space-between',
     padding: '15px 20px 38px 20px',
     [`@media (min-width:${breakpoints.width('lg')}px)`]: {
@@ -40,11 +41,14 @@ const styles = ({ breakpoints }) => ({
   },
   asideHeader: {
     width: 40,
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   hide: {
     display: 'none',
   },
-  menuIcon: {
+  absolute: {
     position: 'absolute',
   },
   icon: {
@@ -62,12 +66,9 @@ export const menus = [
   { label: 'People', link: '#people' },
 ];
 
-const Header = ({ classes }) => {
+const Header = ({ classes, className }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-
-  const theme = useTheme();
-  const breakpoint = theme.breakpoints.up('sm');
-  const exitDuration = theme.transitions.duration.leavingScreen;
+  const { transitionIn, hideContent } = useDetectTransition();
 
   const openDrawer = () => {
     setDrawerOpen(true);
@@ -78,46 +79,38 @@ const Header = ({ classes }) => {
   };
 
   return (
-    <DetectTransition mediaQuery={breakpoint} exitDuration={exitDuration}>
-      {({ transitionIn, hideContent }) => (
-        <header className={classes.header}>
-          <Fade in={transitionIn}>
-            <div
-              className={cx(classes.asideHeader, hideContent && classes.hide)}
-            >
-              icon
-            </div>
-          </Fade>
-          <Fade in={!transitionIn}>
-            <IconButton
-              className={cx(classes.menuIcon, !hideContent && classes.hide)}
-              onClick={openDrawer}
-            >
-              <Icon className={classes.icon}>menu</Icon>
-            </IconButton>
-          </Fade>
-          <InnerContainer>
-            <Fade in={true} timeout={200}>
-              <div className={classes.headerContent}>
-                <img className={classes.logo} src={logo} alt="The Siren Logo" />
-              </div>
-            </Fade>
-            <Collapse in={transitionIn}>
-              <Navbar className={classes.navbar} menus={menus} />
-              <Divider />
-            </Collapse>
-          </InnerContainer>
-          <Fade in={transitionIn}>
-            <div
-              className={cx(classes.asideHeader, hideContent && classes.hide)}
-            >
-              search
-            </div>
-          </Fade>
-          <MenuDrawer open={drawerOpen} onClose={closeDrawer} />
-        </header>
-      )}
-    </DetectTransition>
+    <header className={cx(className, classes.header)}>
+      <Fade in={transitionIn}>
+        <div className={cx(classes.asideHeader, hideContent && classes.hide)}>
+          icon
+        </div>
+      </Fade>
+      <Fade in={!transitionIn}>
+        <IconButton
+          className={cx(classes.absolute, !hideContent && classes.hide)}
+          onClick={openDrawer}
+        >
+          <Icon className={classes.icon}>menu</Icon>
+        </IconButton>
+      </Fade>
+      <InnerContainer>
+        <Fade in={true} timeout={300}>
+          <div className={classes.headerContent}>
+            <img className={classes.logo} src={logo} alt="The Siren Logo" />
+          </div>
+        </Fade>
+        <Collapse in={transitionIn} appear={false}>
+          <Navbar className={classes.navbar} menus={menus} />
+          <Divider />
+        </Collapse>
+      </InnerContainer>
+      <Fade in={transitionIn}>
+        <div className={cx(classes.asideHeader, hideContent && classes.hide)}>
+          <Icon className={classes.icon}>search</Icon>
+        </div>
+      </Fade>
+      <MenuDrawer open={drawerOpen} onClose={closeDrawer} />
+    </header>
   );
 };
 

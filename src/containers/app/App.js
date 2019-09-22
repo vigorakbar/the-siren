@@ -11,4 +11,4 @@ const App = () => (
   </React.Fragment>
 );
 
-export default App
+export default App;
