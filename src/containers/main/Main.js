@@ -1,14 +1,15 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { withStyles, Fade } from '@material-ui/core';
 import cx from 'classnames';
 import InnerContainer from 'components/containers/InnerContainer';
-import Carousel2 from 'assets/images/carousel2.png';
-import AsideCarousel1 from 'assets/images/asideCarousel1.png';
-import AsideCarousel2 from 'assets/images/asideCarousel2.png';
+import Carousel from 'components/Carousel/Carousel';
+import { getCarouselImages, getAsideCarouselImages } from 'helpers/requests';
+import { useDetectTransition } from 'helpers/hooks';
 
 const styles = theme => ({
   main: {
-    padding: '4vw',
+    padding: '0 4vw',
+    marginBottom: '95px',
   },
   imageContainer: {
     display: 'flex',
@@ -18,10 +19,6 @@ const styles = theme => ({
     [`@media (max-width:${theme.breakpoints.width('sm')}px)`]: {
       height: '30vh',
     },
-  },
-  image: {
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
   },
   carousel: {
     flexGrow: 2.1,
@@ -33,39 +30,60 @@ const styles = theme => ({
     flexGrow: 0.9,
     display: 'flex',
     flexDirection: 'column',
-    [`@media (max-width:${theme.breakpoints.width('md')}px)`]: {
-      display: 'none',
-    },
   },
   asideCarouselImage: {
     flexGrow: 1,
     marginLeft: '1vw',
     '&:first-child': {
       marginBottom: '0.5vw',
-    }
+    },
+  },
+  displayNone: {
+    display: 'none',
   }
 });
-const Main = ({ classes }) => (
-  <main className={classes.main}>
-    <InnerContainer>
-      <div className={classes.imageContainer}>
-        <div
-          className={cx(classes.image, classes.carousel)}
-          style={{ backgroundImage: `url(${Carousel2})` }}
-        />
-        <div className={classes.asideCarouselContainer}>
-          <div
-            className={cx(classes.image, classes.asideCarouselImage)}
-            style={{ backgroundImage: `url(${AsideCarousel1})` }}
-          />
-          <div
-            className={cx(classes.image, classes.asideCarouselImage)}
-            style={{ backgroundImage: `url(${AsideCarousel2})` }}
-          />
+const Main = ({ classes, className }) => {
+  const [carouselImageList, setCarouselImageList] = useState([]);
+  const [asideCarouselImageList, setAsideCarouselImageList] = useState([]);
+  const { transitionIn, hideContent } = useDetectTransition('md');
+
+  useEffect(() => {
+    getCarouselImages()
+      .then(res => {
+        setCarouselImageList(res.data);
+      })
+      .catch(err => console.log(err));
+
+    getAsideCarouselImages()
+      .then(res => {
+        setAsideCarouselImageList(res.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  return (
+    <main className={cx(className, classes.main)}>
+      <InnerContainer>
+        <div className={classes.imageContainer}>
+          <div className={classes.carousel}>
+            <Carousel images={carouselImageList} />
+          </div>
+          <Fade in={transitionIn}>
+            <div className={cx(classes.asideCarouselContainer, hideContent && classes.displayNone)}>
+              {asideCarouselImageList.map((asideImage, i) => (
+                <div
+                  key={asideImage}
+                  className={cx(classes.image, classes.asideCarouselImage)}
+                  style={{ backgroundImage: `url(${asideImage})` }}
+                  aria-label={`side carousel ${i + 1}`}
+                />
+              ))}
+            </div>
+          </Fade>
         </div>
-      </div>
-    </InnerContainer>
-  </main>
-);
+      </InnerContainer>
+    </main>
+  );
+};
 
 export default withStyles(styles)(Main);
