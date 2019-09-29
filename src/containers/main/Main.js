@@ -66,7 +66,7 @@ const Main = ({ classes, className }) => {
       <InnerContainer>
         <div className={classes.imageContainer}>
           <div className={classes.carousel}>
-            <Carousel images={carouselImageList} />
+            <Carousel images={carouselImageList} backgroundPosition={hideContent ? 'center' : 'default'} />
           </div>
           <Fade in={transitionIn}>
             <div className={cx(classes.asideCarouselContainer, hideContent && classes.displayNone)}>
@@ -74,7 +74,7 @@ const Main = ({ classes, className }) => {
                 <div
                   key={asideImage}
                   className={cx(classes.image, classes.asideCarouselImage)}
-                  style={{ backgroundImage: `url(${asideImage})` }}
+                  style={{ backgroundImage: `url(${asideImage})`, backgroundPosition: 'center' }}
                   aria-label={`side carousel ${i + 1}`}
                 />
               ))}

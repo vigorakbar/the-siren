@@ -48,6 +48,7 @@ const Carousel = ({
   interval = 5300,
   exitTime = 500,
   enterTime = 500,
+  backgroundPosition = 'default'
 }) => {
   // set interval for slide event
   const [activeIndex, setActiveIndex] = useState(0);
@@ -97,7 +98,7 @@ const Carousel = ({
                   isActive && classes.imageFront,
                   !isActive && classes.imageBack
                 )}
-                style={{ backgroundImage: `url(${image})` }}
+                style={{ backgroundImage: `url(${image})`, backgroundPosition }}
                 role="img"
                 aria-label={`carousel image ${i + 1}`}
               >
