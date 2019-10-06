@@ -104,7 +104,7 @@ const Carousel = ({
                 classes.fullSize,
                 isPrevActive ? classes.imageMiddle : classes.imageBack
               )}
-              style={{ backgroundImage: `url(${image})` }}
+              style={{ backgroundImage: `url(${image})`, backgroundPosition }}
             />
             <div className={cx(classes.dotsContainer, classes.overlay)}>
               {renderDots()}
