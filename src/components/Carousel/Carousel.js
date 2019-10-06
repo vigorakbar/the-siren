@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { withStyles, Fade } from '@material-ui/core';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import Dot from './Dot';
-import { usePrevious } from 'helpers/hooks';
+import { useCarouselIndex } from 'helpers/hooks';
 
 const styles = () => ({
   root: {
@@ -48,20 +48,13 @@ const Carousel = ({
   interval = 5300,
   exitTime = 500,
   enterTime = 500,
-  backgroundPosition = 'default'
+  backgroundPosition = 'default',
 }) => {
   // set interval for slide event
-  const [activeIndex, setActiveIndex] = useState(0);
-  const prevActiveIndex = usePrevious(activeIndex);
-  useEffect(() => {
-    const next = (activeIndex + 1) % images.length;
-    const timeout = setTimeout(() => {
-      setActiveIndex(next);
-    }, interval);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [activeIndex, prevActiveIndex, images.length, interval]);
+  const [activeIndex, setActiveIndex, prevActiveIndex] = useCarouselIndex({
+    totalImage: images.length,
+    interval,
+  });
 
   const renderDots = () => (
     <div>

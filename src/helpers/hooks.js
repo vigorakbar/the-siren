@@ -35,3 +35,20 @@ export const useDetectTransition = (breakpoint = 'sm') => {
 
   return { transitionIn, hideContent };
 };
+
+export const useCarouselIndex = ({ totalImage, interval }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const prevActiveIndex = usePrevious(activeIndex);
+
+  useEffect(() => {
+    const next = (activeIndex + 1) % totalImage;
+    const timeout = setTimeout(() => {
+      setActiveIndex(next);
+    }, interval);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [activeIndex, prevActiveIndex, totalImage, interval]);
+
+  return [activeIndex, setActiveIndex, prevActiveIndex];
+}
