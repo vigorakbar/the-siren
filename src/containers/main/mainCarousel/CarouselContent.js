@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import Carousel from 'components/Carousel/Carousel';
-import { getCarouselImages } from 'helpers/requests';
+import { getCarouselData } from 'helpers/requests';
 
 const styles = () => ({
   carousel: {
@@ -12,12 +12,12 @@ const styles = () => ({
 });
 
 const CarouselContent = ({ classes, hideContent }) => {
-  const [carouselImageList, setCarouselImageList] = useState([]);
+  const [carouselImageData, setCarouselImageData] = useState([]);
 
   useEffect(() => {
-    getCarouselImages()
+    getCarouselData()
       .then(res => {
-        setCarouselImageList(res.data);
+        setCarouselImageData(res.data);
       })
       .catch(err => console.log(err));
   }, []);
@@ -25,7 +25,7 @@ const CarouselContent = ({ classes, hideContent }) => {
   return (
     <div className={classes.carousel}>
       <Carousel
-        images={carouselImageList}
+        data={carouselImageData}
         backgroundPosition={hideContent ? 'center' : 'default'}
       />
     </div>

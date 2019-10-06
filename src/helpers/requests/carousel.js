@@ -6,22 +6,64 @@ import Carousel4 from 'assets/images/carousel4.png';
 import AsideCarousel1 from 'assets/images/asideCarousel1.png';
 import AsideCarousel2 from 'assets/images/asideCarousel2.png';
 
-const carouselImageList = [Carousel1, Carousel2, Carousel3, Carousel4];
-const asideCarouselImageList = [AsideCarousel1, AsideCarousel2];
+const carouselData = [
+  {
+    id: '1',
+    title: 'Sky, Mountains, and River – Unforgettable Experience',
+    image: Carousel1,
+    category: 'travel',
+    releaseDate: '2017-07-21',
+  },
+  {
+    id: '2',
+    title: 'Arizona Ultimate Adventure – Grand Canyon & Beyond',
+    image: Carousel2,
+    category: 'travel',
+    releaseDate: '2017-07-21',
+  },
+  {
+    id: '3',
+    title: 'Go See The World and Overcome Your Biggest Fear',
+    image: Carousel3,
+    category: 'travel',
+    releaseDate: '2017-07-21',
+  },
+  {
+    id: '4',
+    title: 'Deep Into The Jungle – A Challenging Adventure',
+    image: Carousel4,
+    category: 'travel',
+    releaseDate: '2017-07-21',
+  },
+];
+const asideCarouselData = [
+  {
+    id: '1',
+    title: 'The SoundCloud You Loved is Doomed',
+    image: AsideCarousel1,
+    category: 'music',
+    releaseDate: '2017-07-21',
+  },
+  {
+    id: '2',
+    title: 'OneWeb Vouches for High Reliability of Its Deorbit System',
+    image: AsideCarousel2,
+    category: 'travel',
+    releaseDate: '2017-07-21',
+  },
+];
 
 // mock request
-export const getCarouselImages = () => (
-  new Promise((resolve) => {
+export const getCarouselData = () =>
+  new Promise(resolve => {
     resolve({
-      data: carouselImageList
-    })
-  })
-);
+      data: carouselData,
+    });
+  });
 
-export const getAsideCarouselImages = () => (
-  new Promise((resolve) => {
+export const getAsideCarouselData = () =>
+  new Promise(resolve => {
     resolve({
-      data: asideCarouselImageList
-    })
-  })
-);
+      data: asideCarouselData,
+    });
+  });

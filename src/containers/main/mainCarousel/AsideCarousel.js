@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
-import { getAsideCarouselImages } from 'helpers/requests';
+import { getAsideCarouselData } from 'helpers/requests';
 
 const styles = () => ({
   asideCarouselContainer: {
@@ -23,12 +23,12 @@ const styles = () => ({
 });
 
 const AsideCarousel = ({ classes, hideContent }) => {
-  const [asideCarouselImageList, setAsideCarouselImageList] = useState([]);
+  const [asideCarouselData, setAsideCarouselData] = useState([]);
 
   useEffect(() => {
-    getAsideCarouselImages()
+    getAsideCarouselData()
       .then(res => {
-        setAsideCarouselImageList(res.data);
+        setAsideCarouselData(res.data);
       })
       .catch(err => console.log(err));
   }, []);
@@ -40,12 +40,12 @@ const AsideCarousel = ({ classes, hideContent }) => {
         hideContent && classes.displayNone
       )}
     >
-      {asideCarouselImageList.map((asideImage, i) => (
+      {asideCarouselData.map((asideData, i) => (
         <div
-          key={asideImage}
+          key={asideData.id}
           className={classes.asideCarouselImage}
           style={{
-            backgroundImage: `url(${asideImage})`,
+            backgroundImage: `url(${asideData.image})`,
             backgroundPosition: 'center',
           }}
           aria-label={`side carousel ${i + 1}`}

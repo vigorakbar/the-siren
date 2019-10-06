@@ -43,7 +43,7 @@ const styles = () => ({
 const Carousel = ({
   className,
   classes,
-  images,
+  data,
   overlay,
   interval = 5300,
   exitTime = 500,
@@ -52,15 +52,15 @@ const Carousel = ({
 }) => {
   // set interval for slide event
   const [activeIndex, setActiveIndex, prevActiveIndex] = useCarouselIndex({
-    totalImage: images.length,
+    totalImage: data.length,
     interval,
   });
 
   const renderDots = () => (
     <div>
-      {images.map((image, i) => (
+      {data.map((item, i) => (
         <Dot
-          key={i}
+          key={item.id}
           isActive={activeIndex === i}
           onClick={() => {
             setActiveIndex(i);
@@ -73,13 +73,13 @@ const Carousel = ({
 
   return (
     <div className={cx(className, classes.root, classes.fullSize)}>
-      {images.map((image, i) => {
+      {data.map((item, i) => {
         const isActive = activeIndex === i;
         const isPrevActive = prevActiveIndex === i;
         return (
-          <React.Fragment key={i}>
+          <React.Fragment key={item.id}>
             <Fade
-              key={i}
+              key={item.id}
               in={isActive}
               timeout={{ enter: enterTime, exit: exitTime }}
               appear={false}
@@ -91,7 +91,10 @@ const Carousel = ({
                   isActive && classes.imageFront,
                   !isActive && classes.imageBack
                 )}
-                style={{ backgroundImage: `url(${image})`, backgroundPosition }}
+                style={{
+                  backgroundImage: `url(${item.image})`,
+                  backgroundPosition,
+                }}
                 role="img"
                 aria-label={`carousel image ${i + 1}`}
               >
@@ -104,7 +107,10 @@ const Carousel = ({
                 classes.fullSize,
                 isPrevActive ? classes.imageMiddle : classes.imageBack
               )}
-              style={{ backgroundImage: `url(${image})`, backgroundPosition }}
+              style={{
+                backgroundImage: `url(${item.image})`,
+                backgroundPosition,
+              }}
             />
             <div className={cx(classes.dotsContainer, classes.overlay)}>
               {renderDots()}
@@ -117,7 +123,14 @@ const Carousel = ({
 };
 
 Carousel.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      image: PropTypes.string,
+      category: PropTypes.string,
+      releaseDate: PropTypes.string,
+    })
+  ).isRequired,
   overlay: PropTypes.node,
   interval: PropTypes.number,
   exitTime: PropTypes.number,
