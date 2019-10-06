@@ -5,16 +5,14 @@ import cx from 'classnames';
 const styles = theme => {
   return {
     root: {
-      width: '100%',
-      maxWidth: '1400px',
-      margin: '0 auto',
+      padding: '0 4vw',
     },
   };
 };
 
-const InnerContainer = ({ children, classes, className, tag = 'div' }) => {
-  const Tag = tag
+const OuterContainer = ({ children, classes, className, tag = 'div' }) => {
+  const Tag = tag;
   return <Tag className={cx(className, classes.root)}>{children}</Tag>;
 };
 
-export default withStyles(styles)(InnerContainer);
+export default withStyles(styles)(OuterContainer);
