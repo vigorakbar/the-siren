@@ -6,14 +6,14 @@ import CarouselContent from './CarouselContent';
 import AsideCarousel from './AsideCarousel';
 import OuterContainer from 'components/containers/OuterContainer';
 
-const styles = theme => ({
+const styles = ({ breakpoints }) => ({
   imageContainer: {
     display: 'flex',
     maxHeight: '590px',
     minHeight: '200px',
-    height: '80vh',
-    [`@media (max-width:${theme.breakpoints.width('sm')}px)`]: {
-      height: '30vh',
+    height: '30vh',
+    [breakpoints.up('sm')]: {
+      height: '80vh',
     },
   },
 });
@@ -22,8 +22,8 @@ const MainCarousel = ({ classes, className }) => {
   const { transitionIn, hideContent } = useDetectTransition('md');
 
   return (
-    <OuterContainer tag="section">
-      <InnerContainer className={className}>
+    <OuterContainer tag="section" className={className}>
+      <InnerContainer>
         <div className={classes.imageContainer}>
           <CarouselContent hideContent={hideContent} />
           <Fade in={transitionIn}>

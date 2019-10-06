@@ -4,16 +4,19 @@ import { withStyles } from '@material-ui/core';
 import MainCarousel from './mainCarousel/MainCarousel';
 import LatestSection from './latestSection/LatestSection';
 
-const styles = theme => ({
-  main: {
-    marginBottom: '95px',
+const styles = ({ breakpoints }) => ({
+  sectionMargin1: {
+    marginBottom: '4.9vw',
+    [breakpoints.up('xl')]: {
+      marginBottom: '95px',
+    },
   },
 });
 
 const Main = ({ classes, className }) => {
   return (
-    <main className={cx(className, classes.main)}>
-      <MainCarousel />
+    <main className={cx(className)}>
+      <MainCarousel className={classes.sectionMargin1} />
       <LatestSection />
     </main>
   );

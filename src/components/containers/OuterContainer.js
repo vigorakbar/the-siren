@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core';
 import cx from 'classnames';
 
-const styles = theme => {
+const styles = () => {
   return {
     root: {
       padding: '0 4vw',

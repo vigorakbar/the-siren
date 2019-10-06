@@ -21,7 +21,7 @@ const styles = ({ breakpoints }) => ({
     margin: '0 auto',
     justifyContent: 'space-between',
     padding: '15px 20px 38px 20px',
-    [`@media (min-width:${breakpoints.width('lg')}px)`]: {
+    [breakpoints.up('lg')]: {
       padding: '30px 40px 38px 40px',
     },
   },
