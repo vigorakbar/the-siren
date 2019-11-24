@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles, Typography } from '@material-ui/core';
-import HighlightLine from 'components/lines/HighlightLine/HighlightLine';
+import HighlightLine from 'components/Lines/HighlightLine';
 
 const styles = ({ breakpoints }) => ({
   root: {
