@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { withStyles } from '@material-ui/core';
 import Carousel from 'components/Carousel/Carousel';
+import Overlay from 'components/Carousel/Overlay';
 import { getCarouselData } from 'helpers/requests';
 
-const styles = () => ({
+const styles = ({ breakpoints, palette }) => ({
   carousel: {
     flexGrow: 2.1,
     maxWidth: '940px',
@@ -12,12 +13,12 @@ const styles = () => ({
 });
 
 const CarouselContent = ({ classes, hideContent }) => {
-  const [carouselImageData, setCarouselImageData] = useState([]);
+  const [carouselData, setCarouselData] = useState([]);
 
   useEffect(() => {
     getCarouselData()
       .then(res => {
-        setCarouselImageData(res.data);
+        setCarouselData(res.data);
       })
       .catch(err => console.log(err));
   }, []);
@@ -25,8 +26,9 @@ const CarouselContent = ({ classes, hideContent }) => {
   return (
     <div className={classes.carousel}>
       <Carousel
-        data={carouselImageData}
+        data={carouselData}
         backgroundPosition={hideContent ? 'center' : 'default'}
+        overlay={index => <Overlay index={index} data={carouselData[index]} underlineText/>}
       />
     </div>
   );

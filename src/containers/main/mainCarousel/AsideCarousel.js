@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
 import { getAsideCarouselData } from 'helpers/requests';
+import Overlay from 'components/Carousel/Overlay';
 
 const styles = () => ({
   asideCarouselContainer: {
@@ -16,6 +17,7 @@ const styles = () => ({
     '&:first-child': {
       marginBottom: '0.5vw',
     },
+    position: 'relative',
   },
   displayNone: {
     display: 'none',
@@ -49,7 +51,9 @@ const AsideCarousel = ({ classes, hideContent }) => {
             backgroundPosition: 'center',
           }}
           aria-label={`side carousel ${i + 1}`}
-        />
+        >
+          <Overlay data={asideData} size="small" />
+        </div>
       ))}
     </div>
   );

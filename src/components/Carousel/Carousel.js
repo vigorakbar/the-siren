@@ -98,7 +98,7 @@ const Carousel = ({
                 role="img"
                 aria-label={`carousel image ${i + 1}`}
               >
-                {overlay}
+                {overlay(i)}
               </div>
             </Fade>
             <div
@@ -131,7 +131,7 @@ Carousel.propTypes = {
       releaseDate: PropTypes.string,
     })
   ).isRequired,
-  overlay: PropTypes.node,
+  overlay: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   interval: PropTypes.number,
   exitTime: PropTypes.number,
   enterTime: PropTypes.number,
