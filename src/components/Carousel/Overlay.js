@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Divider } from '@material-ui/core';
 
 const styles = ({ breakpoints, palette }) => ({
   overlay: {
@@ -106,6 +106,7 @@ const Overlay = ({
       <p className={cx(classes.overlayContent, classes.overlayInfo)}>
         {data.category.toUpperCase()} / {data.releaseDate.toUpperCase()}
       </p>
+      {!isMedium && <Divider className={classes.overlayContent} style={{width: 30}} />}
     </div>
   );
 };

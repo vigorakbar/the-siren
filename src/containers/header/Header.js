@@ -10,6 +10,10 @@ import {
 } from '@material-ui/core';
 import InnerContainer from 'components/containers/InnerContainer';
 import logo from 'assets/logo.png';
+import { ReactComponent as FacebookLogo } from 'assets/svg/facebook.svg';
+import { ReactComponent as TwitterLogo } from 'assets/svg/twitter.svg';
+import { ReactComponent as InstagramLogo } from 'assets/svg/instagram.svg';
+import { ReactComponent as MoreLogo } from 'assets/svg/more.svg';
 import Navbar from 'components/NavBar/Navbar';
 import MenuDrawer from './MenuDrawer';
 import { useDetectTransition } from 'helpers/hooks';
@@ -82,7 +86,10 @@ const Header = ({ classes, className }) => {
     <header className={cx(className, classes.header)}>
       <Fade in={transitionIn}>
         <div className={cx(classes.asideHeader, hideContent && classes.hide)}>
-          icon
+          <FacebookLogo width="40px" height="40px" />
+          <TwitterLogo width="40px" height="40px" />
+          <InstagramLogo width="40px" height="40px" />
+          <MoreLogo width="40px" height="40px" />
         </div>
       </Fade>
       <Fade in={!transitionIn}>
