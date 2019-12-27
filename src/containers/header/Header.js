@@ -58,6 +58,14 @@ const styles = ({ breakpoints }) => ({
   icon: {
     fontSize: '2.4rem',
   },
+  searchButton: {
+    height: '48px'
+  },
+  socialButton: {
+    width: '40px',
+    height: '40px',
+    padding: 0,
+  }
 });
 
 export const menus = [
@@ -86,10 +94,18 @@ const Header = ({ classes, className }) => {
     <header className={cx(className, classes.header)}>
       <Fade in={transitionIn}>
         <div className={cx(classes.asideHeader, hideContent && classes.hide)}>
-          <FacebookLogo width="40px" height="40px" />
-          <TwitterLogo width="40px" height="40px" />
-          <InstagramLogo width="40px" height="40px" />
-          <MoreLogo width="40px" height="40px" />
+          <IconButton href="http://www.facebook.com" target="_blank" className={classes.socialButton}>
+            <FacebookLogo width="40px" height="40px" />
+          </IconButton>
+          <IconButton href="http://www.twitter.com" target="_blank" className={classes.socialButton}>
+            <TwitterLogo width="40px" height="40px" />
+          </IconButton>
+          <IconButton href="http://www.instagram.com" target="_blank" className={classes.socialButton}>
+            <InstagramLogo width="40px" height="40px" />
+          </IconButton>
+          <IconButton className={classes.socialButton}>
+            <MoreLogo width="40px" height="40px" />
+          </IconButton>
         </div>
       </Fade>
       <Fade in={!transitionIn}>
@@ -113,7 +129,9 @@ const Header = ({ classes, className }) => {
       </InnerContainer>
       <Fade in={transitionIn}>
         <div className={cx(classes.asideHeader, hideContent && classes.hide)}>
-          <Icon className={classes.icon}>search</Icon>
+          <IconButton className={classes.searchButton}>
+            <Icon className={classes.icon}>search</Icon>
+          </IconButton>
         </div>
       </Fade>
       <MenuDrawer open={drawerOpen} onClose={closeDrawer} />
