@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/the-siren/static/css/main.d51cb0c2.chunk.css",
+    "main.js": "/the-siren/static/js/main.e825345a.chunk.js",
+    "main.js.map": "/the-siren/static/js/main.e825345a.chunk.js.map",
+    "runtime~main.js": "/the-siren/static/js/runtime~main.581756f8.js",
+    "runtime~main.js.map": "/the-siren/static/js/runtime~main.581756f8.js.map",
+    "static/js/2.2145f0c8.chunk.js": "/the-siren/static/js/2.2145f0c8.chunk.js",
+    "static/js/2.2145f0c8.chunk.js.map": "/the-siren/static/js/2.2145f0c8.chunk.js.map",
+    "index.html": "/the-siren/index.html",
+    "precache-manifest.79edda746668d79b75764b1b76e12bc6.js": "/the-siren/precache-manifest.79edda746668d79b75764b1b76e12bc6.js",
+    "service-worker.js": "/the-siren/service-worker.js",
+    "static/css/main.d51cb0c2.chunk.css.map": "/the-siren/static/css/main.d51cb0c2.chunk.css.map",
+    "static/media/asideCarousel1.png": "/the-siren/static/media/asideCarousel1.7d8d881d.png",
+    "static/media/asideCarousel2.png": "/the-siren/static/media/asideCarousel2.0039c90b.png",
+    "static/media/carousel1.png": "/the-siren/static/media/carousel1.a75346a6.png",
+    "static/media/carousel2.png": "/the-siren/static/media/carousel2.4a76763c.png",
+    "static/media/carousel3.png": "/the-siren/static/media/carousel3.91d416f7.png",
+    "static/media/carousel4.png": "/the-siren/static/media/carousel4.f56d3dc2.png",
+    "static/media/facebook.30e4c7ce.svg": "/the-siren/static/media/facebook.30e4c7ce.svg",
+    "static/media/instagram.63792d51.svg": "/the-siren/static/media/instagram.63792d51.svg",
+    "static/media/latest1.png": "/the-siren/static/media/latest1.6e7f36b9.png",
+    "static/media/latest2.png": "/the-siren/static/media/latest2.5d0be437.png",
+    "static/media/latest3.png": "/the-siren/static/media/latest3.feff05b3.png",
+    "static/media/more.594a1320.svg": "/the-siren/static/media/more.594a1320.svg",
+    "static/media/oval.0caaa488.svg": "/the-siren/static/media/oval.0caaa488.svg",
+    "static/media/twitter.95ddc100.svg": "/the-siren/static/media/twitter.95ddc100.svg"
+  }
+}
