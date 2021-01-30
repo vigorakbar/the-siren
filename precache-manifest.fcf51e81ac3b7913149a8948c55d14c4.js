@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "63d2f57bdd230e20b5da312119c4fc48",
+    "revision": "0dbf3ec8b65168fea3f6df73ad2057ae",
     "url": "/the-siren/index.html"
   },
   {
-    "revision": "8de145d97b1119d2a46f",
+    "revision": "d44d359ac93fe4a81f8f",
     "url": "/the-siren/static/css/main.d51cb0c2.chunk.css"
   },
   {
-    "revision": "83f1285641b11a7b3d3a",
-    "url": "/the-siren/static/js/2.2145f0c8.chunk.js"
+    "revision": "aa6881b7362e526b54dc",
+    "url": "/the-siren/static/js/2.2c2951f0.chunk.js"
   },
   {
-    "revision": "8de145d97b1119d2a46f",
-    "url": "/the-siren/static/js/main.e825345a.chunk.js"
+    "revision": "d44d359ac93fe4a81f8f",
+    "url": "/the-siren/static/js/main.cb1c4883.chunk.js"
   },
   {
     "revision": "0d7eab9b829898693b7a",
@@ -50,18 +50,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "63792d511fae0e3272e3b51e8d7dfb24",
     "url": "/the-siren/static/media/instagram.63792d51.svg"
-  },
-  {
-    "revision": "6e7f36b93ea73e750c717e7d288ee645",
-    "url": "/the-siren/static/media/latest1.6e7f36b9.png"
-  },
-  {
-    "revision": "5d0be437b86c99539944f4e866fd01fd",
-    "url": "/the-siren/static/media/latest2.5d0be437.png"
-  },
-  {
-    "revision": "feff05b3973cb70d4f86ab25e9d0f27e",
-    "url": "/the-siren/static/media/latest3.feff05b3.png"
   },
   {
     "revision": "594a13201ffdced44f6e772578a80c7d",
