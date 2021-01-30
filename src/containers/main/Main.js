@@ -2,7 +2,6 @@ import React from 'react';
 import cx from 'classnames';
 import { withStyles } from '@material-ui/core';
 import MainCarousel from './mainCarousel/MainCarousel';
-import LatestSection from './latestSection/LatestSection';
 
 const styles = ({ breakpoints }) => ({
   sectionMargin1: {
@@ -17,7 +16,6 @@ const Main = ({ classes, className }) => {
   return (
     <main className={cx(className)}>
       <MainCarousel className={classes.sectionMargin1} />
-      <LatestSection />
     </main>
   );
 };
