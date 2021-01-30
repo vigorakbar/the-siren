@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/the-siren/precache-manifest.fcf51e81ac3b7913149a8948c55d14c4.js"
+  "/the-siren/precache-manifest.f495c19bf526d2b0a04c177c4b76e520.js"
 );
 
 self.addEventListener('message', (event) => {
